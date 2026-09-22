@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Montserrat:wght@500;700&display=swap');
+
+/*
+  1) Variables globales
+  Son colores y medidas reutilizables para no repetir valores.
+  Ejemplo: --green se usa para el botón, --cream para el fondo.
+*/
+:root {
+  --cream: hsl(30, 38%, 92%); /* Fondo general de la página: beige claro */
+  --card-bg: hsl(0, 0%, 100%); /* Fondo de la tarjeta: blanco */
+  --dark-blue: hsl(212, 21%, 14%); /* Color oscuro para el título */
+  --dark-grayish-blue: hsl(228, 12%, 48%); /* Color gris azulado para textos secundarios */
+  --green: hsl(158, 36%, 37%); /* Verde principal del botón */
+  --green-dark: hsl(156, 42%, 18%); /* Verde más oscuro al pasar el mouse */
+  --shadow: 0 20px 35px rgba(28, 35, 43, 0.12); /* Sombra suave alrededor de la tarjeta */
+}
+
+/*
+  2) Reset básico
+  Quitamos márgenes y padding por defecto para controlar todo nosotros.
+  Esto sirve para que todos los elementos empiecen desde cero.
+*/
+* {
+  box-sizing: border-box; /* El ancho y alto incluyen borde y padding */
+  margin: 0; /* Elimina los márgenes externos */
+  padding: 0; /* Elimina el espaciado interno */
+}
+
+html {
+  font-size: 16px; /* Tamaño base del texto: 16px */
+}
+
+/*
+  3) Estilos del body
+  Aquí centramos la tarjeta en la pantalla y definimos el color de fondo general.
+  El body es la página completa.
+*/
+body {
+  min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+  display: flex; /* Convierte el body en contenedor flexible */
+  flex-direction: column; /* Los elementos se apilan verticalmente */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  background: var(--cream); /* Usa el color beige claro guardado en la variable */
+  color: var(--dark-grayish-blue); /* Color de texto principal */
+  font-family: 'Montserrat', sans-serif; /* Fuente general del texto */
+  line-height: 1.6; /* Altura de línea para que se lea mejor */
+  padding: 2rem 1rem; /* Espacio alrededor del contenido */
+}
+
+img {
+  display: block; /* Hace que la imagen se comporte como bloque */
+  max-width: 100%; /* La imagen nunca será más ancha que su contenedor */
+}
+
+/*
+  4) Contenedor principal: .product-card
+  Es el contenedor que envuelve la imagen y el contenido.
+  Con display: grid hacemos dos columnas: imagen a la izquierda y contenido a la derecha.
+*/
+.product-card {
+  width: min(100%, 600px); /* Ancho máximo 600px, pero nunca más que la pantalla */
+  display: grid; /* Activa CSS Grid */
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* Dos columnas iguales */
+  background: var(--card-bg); /* Fondo blanco de la tarjeta */
+  border-radius: 14px; /* Bordes redondeados */
+  overflow: hidden; /* Oculta lo que se salga de la tarjeta */
+  box-shadow: var(--shadow); /* Sombra suave alrededor */
+}
+
+/*
+  5) Imagen del producto: .product-card__image
+  Ocupa el espacio de la primera columna.
+*/
+.product-card__image {
+  min-height: 100%; /* La imagen toma la altura completa de la tarjeta */
+}
+
+.product-card__image img {
+  width: 100%; /* Imagen ocupa todo el ancho del contenedor */
+  height: 100%; /* Imagen ocupa toda la altura del contenedor */
+  object-fit: cover; /* Ajusta la imagen sin deformarla; recorta si hace falta */
+}
+
+/*
+  6) Sección del contenido: .product-card__content
+  Aquí va todo el texto, precio y botón.
+*/
+.product-card__content {
+  padding: 2rem; /* Espacio interno para separar el contenido del borde */
+  display: flex; /* Convierte este bloque en un contenedor flexible */
+  flex-direction: column; /* Los elementos internos se colocan uno debajo del otro */
+  justify-content: center; /* Centra verticalmente el contenido */
+}
+
+/*
+  7) Categoría del perfume: .product-card__category
+  Es un texto pequeño, en mayúsculas y con un poco de separación entre letras.
+*/
+.product-card__category {
+  font-size: 0.75rem; /* Tamaño pequeño */
+  letter-spacing: 0.38rem; /* Separación entre letras */
+  text-transform: uppercase; /* Convierte el texto en mayúsculas */
+  margin-bottom: 1rem; /* Espacio debajo */
+  color: var(--dark-grayish-blue); /* Color gris azulado */
+}
+
+/*
+  8) Título principal: .product-card__title
+  Usa una fuente serif para darle estilo premium.
+*/
+.product-card__title {
+  font-family: 'Fraunces', serif; /* Fuente elegante para el nombre del perfume */
+  font-size: clamp(2.2rem, 2.4vw, 3rem); /* Ajusta el tamaño según la pantalla */
+  line-height: 1; /* Reduce el espacio entre líneas */
+  color: var(--dark-blue); /* Color oscuro para el texto */
+  margin-bottom: 1.15rem; /* Separación hacia abajo */
+}
+
+/*
+  9) Descripción: .product-card__description
+  Texto más pequeño y de lectura fácil.
+*/
+.product-card__description {
+  font-size: 0.95rem; /* Tamaño de texto algo más pequeño */
+  margin-bottom: 1.5rem; /* Espacio debajo */
+}
+
+/*
+  10) Precio: .product-card__pricing
+  Agrupamos el precio actual y el anterior en una fila.
+*/
+.product-card__pricing {
+  display: flex; /* Los elementos se ponen en horizontal */
+  align-items: center; /* Los centra verticalmente */
+  gap: 1rem; /* Espacio entre ellos */
+  margin-bottom: 1.8rem; /* Distancia hacia el botón */
+}
+
+.product-card__price {
+  font-family: 'Fraunces', serif; /* Misma fuente elegante para resaltar el precio */
+  font-size: clamp(2rem, 2vw, 2.5rem); /* Tamaño grande del precio principal */
+  color: var(--green); /* Verde del precio actual */
+  line-height: 1; /* Ajusta la altura de la línea */
+}
+
+.product-card__old-price {
+  font-size: 0.83rem; /* Precio anterior más pequeño */
+  text-decoration: line-through; /* Tacha el texto */
+  color: var(--dark-grayish-blue); /* Color gris para que parezca menos importante */
+}
+
+/*
+  11) Botón: .product-card__button
+  Es un botón con fondo verde, texto blanco y efecto hover.
+*/
+.product-card__button {
+  width: 100%; /* El botón ocupa todo el ancho disponible */
+  border: none; /* Quita el borde */
+  border-radius: 10px; /* Redondea los bordes */
+  background: var(--green); /* Fondo verde principal */
+  color: white; /* Texto blanco */
+  padding: 1rem 1.2rem; /* Espacio interno del botón */
+  font: inherit; /* Hereda la fuente general */
+  font-weight: 700; /* Hace el texto más grueso */
+  display: inline-flex; /* Hace que el contenido interno se alinee horizontalmente */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  gap: 0.75rem; /* Espacio entre el icono y el texto */
+  cursor: pointer; /* Cambia el cursor cuando pasas por encima */
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Transición suave */
+  box-shadow: 0 12px 18px rgba(60, 128, 103, 0.2); /* Sombra ligera bajo el botón */
+}
+
+.product-card__button:hover {
+  background: var(--green-dark); /* Cambia a verde más oscuro al pasar el mouse */
+  transform: translateY(-1px); /* Lo levanta un poco */
+}
+
+.product-card__button:active {
+  transform: translateY(0); /* Cuando haces clic, vuelve a su posición */
+}
+
+.product-card__button img {
+  width: 1rem; /* Tamaño del icono del carrito */
+  height: 1rem; /* Altura del icono */
+}
+
+/*
+  12) Footer de atribución: .attribution
+  Ese bloque está fuera de la tarjeta pero comparte el mismo estilo visual.
+*/
+.attribution {
+  margin-top: 1.5rem; /* Espacio arriba del footer */
+  font-size: 0.75rem; /* Texto pequeño */
+  text-align: center; /* Centra el texto */
+  color: var(--dark-grayish-blue); /* Color gris azulado */
+}
+
+.attribution a {
+  color: var(--green); /* Links en verde */
+  text-decoration: none; /* Quita subrayado */
+  font-weight: 700; /* Hace los enlaces más visibles */
+}
+
+.attribution a:hover {
+  text-decoration: underline; /* Al pasar el mouse, se subraya */
+}
+
+/*
+  13) Responsive: mobile
+  Cuando la pantalla es pequeña, la tarjeta pasa a una sola columna.
+*/
+@media (max-width: 560px) {
+  body {
+    padding: 1.2rem 1rem; /* Reduce el espacio alrededor en móvil */
+  }
+
+  .product-card {
+    grid-template-columns: 1fr; /* En móvil, la tarjeta pasa a 1 columna */
+  }
+
+  .product-card__image {
+    max-height: 280px; /* Limita la altura de la imagen en mobile */
+  }
+
+  .product-card__content {
+    padding: 1.2rem 1.2rem 1.5rem; /* Reduce el relleno del contenido */
+  }
+
+  .product-card__category {
+    margin-bottom: 0.7rem; /* Ajusta separación del texto pequeño */
+  }
+
+  .product-card__title {
+    margin-bottom: 0.9rem; /* Ajusta el espacio del título */
+  }
+
+  .product-card__description {
+    margin-bottom: 1.2rem; /* Ajusta la separación de la descripción */
+  }
+
+  .product-card__pricing {
+    margin-bottom: 1.3rem; /* Ajusta espacio antes del botón */
+  }
+}
